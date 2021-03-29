@@ -4,4 +4,14 @@
   hosts: molecule_hosts
   gather_facts: no
   tasks:
-    - debug: msg="Verify to be done"
+    - name: retrieve filesystem info
+      command: blkid /dev/mapper/vgtesting-lvtest
+      changed_when: false
+      args:
+        warn: no
+      register: filesystem_info_result
+
+    - name: Assert filesystem is created with fstype
+      assert:
+        that:
+          - filesystem_info_result.stdout is search("xfs")
