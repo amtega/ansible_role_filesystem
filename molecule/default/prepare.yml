@@ -4,4 +4,33 @@
   hosts: molecule_hosts
   gather_facts: no
   tasks:
-    - debug: msg="Preparation tasks"
+    - name: Setup pvm
+      import_role:
+        name: amtega.parted
+      vars:
+        parted_disks:
+          - align: optimal
+            device: /dev/sdb
+            number: 1
+            part_type: primary
+            part_start: 0%
+            part_end: 100%
+            flags: [ lvm ]
+            state: present
+    - name: setup volume group
+      import_role:
+        name: amtega.lvm_vg
+      vars:
+        lvm_vg:
+          - vg: vgtesting
+            pvs: /dev/sdb1
+            pesize: "4"
+            state: present
+    - name: setup logical volume
+      import_role:
+        name: amtega.lvm_lv
+      vars:
+        lvm_lv:
+          - vg: vgtesting
+            lv: lvtest
+            size: 512M

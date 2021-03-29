@@ -2,22 +2,42 @@
 # Role dependencies
 
 galaxy_info:
-  role_name: role
-  author: author name
-  description: role description
+  role_name: filesystem
+  author: José Enrique Mourón Regueira
+  description: This role manage filesystems through ansible filesystem module
   company: AMTEGA - Xunta de Galicia
   license: GPLv3 or EUPL
   min_ansible_version: 2.9
   platforms:
     - name: EL
       versions:
-        - 6
         - 7
         - 8
     - name: Fedora
       versions:
-        - 29
-        - 30
-  galaxy_tags: []
+        - 32
+        - 33
+  galaxy_tags:
+    - system
+    - disk
+    - filesystem
 
-dependencies: []
+dependencies:
+  - role: amtega.check_platform
+    vars:
+      check_platform_distributions:
+        centos: 7
+        fedora: 32
+        redhat: 7
+
+  - role: amtega.select_hostvars
+    vars:
+      select_hostvars_query:
+        pattern: "^filesystem_fs_.*"
+        exclude_pattern: "^filesystem_fs_defaults$"
+        attributes:
+          - dev
+          - fstype
+        fact_name: filesystem_fs_hostvars
+        output_type: list
+    when: filesystem_fs_load_from_hostvars | bool
