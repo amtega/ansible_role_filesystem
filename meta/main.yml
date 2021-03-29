@@ -4,7 +4,7 @@
 galaxy_info:
   role_name: filesystem
   author: José Enrique Mourón Regueira
-  description: This role manage filesystems through ansible filesystem module
+  description: Manage filesystems through ansible filesystem module
   company: AMTEGA - Xunta de Galicia
   license: GPLv3 or EUPL
   min_ansible_version: 2.9
