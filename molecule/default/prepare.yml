@@ -3,8 +3,9 @@
 - name: Prepare
   hosts: molecule_hosts
   gather_facts: no
+  become: yes
   tasks:
-    - name: Setup pvm
+    - name: Setup LVM physical volume
       import_role:
         name: amtega.parted
       vars:
@@ -17,7 +18,8 @@
             part_end: 100%
             flags: [ lvm ]
             state: present
-    - name: setup volume group
+
+    - name: Setup LVM volume group
       import_role:
         name: amtega.lvm_vg
       vars:
@@ -26,7 +28,8 @@
             pvs: /dev/sdb1
             pesize: "4"
             state: present
-    - name: setup logical volume
+
+    - name: Setup LVM logical volume
       import_role:
         name: amtega.lvm_lv
       vars:

@@ -1,26 +1,21 @@
 # Ansible amtega.filesystem role
 
-This is an [Ansible](http://www.ansible.com) role which manage filesystems through ansible filesystem module.
+This is an [Ansible](http://www.ansible.com) role which manages filesystems through ansible filesystem module.
 
-## Requirements
-
-[Ansible 2.7+](http://docs.ansible.com/ansible/latest/intro_installation.html)
 
 ## Role Variables
 
 A list of all the default variables for this role is available in `defaults/main.yml`.
 
-
 ## Testing
+
 Tests are based on [molecule with vagrant virtual machines](https://molecule.readthedocs.io/en/latest/installation.html).
-Amtega.parted, amtega.lvm_vg and amtega.lvm_lv roles are used to prepare vms.
 
 ```shell
 cd amtega.filesystem
 
 molecule test --all
 ```
-
 
 ## License
 
