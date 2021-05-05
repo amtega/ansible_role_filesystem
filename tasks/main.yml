@@ -7,19 +7,19 @@
       {{ filesystem.dev
          | default(filesystem_fs_defaults.dev) }}
     force: >-
-      {{ filesystem_fs_filesystem.force
+      {{ filesystem.force
          | default(filesystem_fs_defaults.force)
          | default(omit) }}
     fstype: >-
-      {{ filesystem_fs_filesystem.fstype
+      {{ filesystem.fstype
          | default(filesystem_fs_defaults.fstype)
          | default(omit) }}
     opts: >-
-      {{ filesystem_fs_filesystem.opts
+      {{ filesystem.opts
          | default(filesystem_fs_defaults.opts)
          | default(omit) }}
     resizefs: >-
-      {{ filesystem_fs_filesystem.resizefs
+      {{ filesystem.resizefs
          | default(filesystem_fs_defaults.resizefs)
          | default(omit) }}
   loop: "{{ filesystem_fs_filesystems_to_manage }}"
@@ -30,6 +30,6 @@
     filesystem_fs_filesystems_to_manage: >-
       {{ filesystem_fs
          + ((filesystem_fs_load_from_hostvars | bool)
-          | ternary(filesystem_fs_hostvars | default([]) | flatten, [])) }}
+            | ternary(filesystem_fs_hostvars | default([]) | flatten, [])) }}
   tags:
     - role::filesystem
