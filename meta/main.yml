@@ -3,6 +3,7 @@
 
 galaxy_info:
   role_name: filesystem
+  namespace: amtega
   author: José Enrique Mourón Regueira
   description: Manage filesystems through ansible filesystem module
   company: AMTEGA - Xunta de Galicia
