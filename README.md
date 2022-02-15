@@ -2,10 +2,25 @@
 
 This is an [Ansible](http://www.ansible.com) role which manages filesystems through ansible filesystem module.
 
-
 ## Role Variables
 
 A list of all the default variables for this role is available in `defaults/main.yml`.
+
+## Example Playbook
+
+This is an example playbook:
+
+```yaml
+---
+
+- hosts: all
+  roles:
+    - amtega.filesystem
+  vars:
+    filesystem_fs:
+      - dev: /dev/mapper/vgtesting-lvtest
+        fstype: xfs
+```
 
 ## Testing
 
@@ -19,7 +34,7 @@ molecule test --all
 
 ## License
 
-Copyright (C) 2021 AMTEGA - Xunta de Galicia
+Copyright (C) 2022 AMTEGA - Xunta de Galicia
 
 This role is free software: you can redistribute it and/or modify it under the terms of:
 
